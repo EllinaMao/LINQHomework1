@@ -8,7 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LINQ\LINQ.csproj" />
+    <ProjectReference Include="..\Task1\Task1.csproj" />
+    <ProjectReference Include="..\Task2\Task2.csproj" />
     <ProjectReference Include="..\Task3\Employers.csproj" />
   </ItemGroup>
 

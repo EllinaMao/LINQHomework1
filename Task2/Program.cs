@@ -1,29 +1,17 @@
-﻿using Task3;
-
-namespace Task1
-{
+﻿using System.ComponentModel.DataAnnotations;
+using Task1;
+namespace Task2
+{/*Задание 2
+Реализуйте запросы из первого задания с использованием синтаксиса методов расширений.
+*/
     internal class Program
-    {/*
-Для массива фирм реализуйте следующие запросы:
-
-Получить информацию обо всех фирмах;
-Получить фирмы, у которых в названии есть слово Food;
-Получить фирмы, которые работают в области маркетинга;
-Получить фирмы, которые работают в области маркетинга или IT;
-Получить фирмы с количеством сотрудников, большем 100;
-Получить фирмы с количеством сотрудников в диапазоне от 100 до 300;
-Получить фирмы, которые находятся в Лондоне;
-Получить фирмы, у которых фамилия директора White;
-Получить фирмы, которые основаны больше двух лет назад;
-Получить фирмы со дня основания, которых прошло 123 дня;
-Получить фирмы, у которых фамилия директора Black и название фирмы содержит слово White.*/
+    {
         static void Main(string[] args)
         {
-            
             DateOnly today = DateOnly.FromDateTime(DateTime.Now);
 
-            
-        List<Firm> firms = new List<Firm>
+
+            List<Firm> firms = new List<Firm>
                 {
                     new Firm { Name = "FoodTech", FoundationDate = today.AddYears(-3), BusinessProfile = "Marketing", DirectorFullName = "John White", EmployeeCount = 150, Address = "London" },
                     new Firm { Name = "IT Solutions", FoundationDate = today.AddYears(-1), BusinessProfile = "IT", DirectorFullName = "Alice Black", EmployeeCount = 80, Address = "Manchester" },
@@ -31,23 +19,19 @@ namespace Task1
                     new Firm { Name = "MarketPros", FoundationDate = today.AddYears(-5), BusinessProfile = "Marketing", DirectorFullName = "Sara White", EmployeeCount = 300, Address = "London" },
                     new Firm { Name = "AgroFood", FoundationDate = today.AddYears(-10), BusinessProfile = "Agriculture", DirectorFullName = "Tom Green", EmployeeCount = 120, Address = "London" }
                 };
-;
-
-            FoundLINQ foundLINQ = new FoundLINQ();
             try
             {
-                foundLINQ.GetAllFirmsInfo(firms).ToList().ForEach(f => Console.WriteLine(f.ToString()));
+                firms.GetAllFirmsInfo().ToList().ForEach(f => Console.WriteLine(f.ToString()));
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Ошибка при получении информации обо всех фирмах: {ex.Message}");
             }
             LINQ.ConsoleCl.ClearConsole();
-
             Console.WriteLine("\nФирмы, в названии которых есть 'Food':");
             try
             {
-                foundLINQ.GetByName(firms, "Food").ToList().ForEach(f => Console.WriteLine(f.ToString()));
+                firms.GetByName("Food").ToList().ForEach(f => Console.WriteLine(f.ToString()));
             }
             catch (Exception ex)
             {
@@ -58,7 +42,7 @@ namespace Task1
             Console.WriteLine("\nФирмы, работающие в области маркетинга:");
             try
             {
-                foundLINQ.GetByBusinessProfile(firms, "Marketing").ToList().ForEach(f => Console.WriteLine(f.ToString()));
+                firms.GetByBusinessProfile("Marketing").ToList().ForEach(f => Console.WriteLine(f.ToString()));
             }
             catch (Exception ex)
             {
@@ -69,7 +53,7 @@ namespace Task1
             Console.WriteLine("\nФирмы, работающие в области маркетинга или IT:");
             try
             {
-                foundLINQ.GetBusinessProfileByWhoParams(firms, "Marketing", "IT").ToList().ForEach(f => Console.WriteLine(f.ToString()));
+                firms.GetBusinessProfileByWhoParams("Marketing", "IT").ToList().ForEach(f => Console.WriteLine(f.ToString()));
             }
             catch (Exception ex)
             {
@@ -80,7 +64,7 @@ namespace Task1
             Console.WriteLine("\nФирмы с количеством сотрудников больше 100:");
             try
             {
-                foundLINQ.GetByEmployeeCount(firms, 100).ToList().ForEach(f => Console.WriteLine(f.ToString()));
+                firms.GetByEmployeeCount(100).ToList().ForEach(f => Console.WriteLine(f.ToString()));
             }
             catch (Exception ex)
             {
@@ -91,7 +75,7 @@ namespace Task1
             Console.WriteLine("\nФирмы с количеством сотрудников от 100 до 300:");
             try
             {
-                foundLINQ.GetByEmployeeCountRange(firms, 100, 300).ToList().ForEach(f => Console.WriteLine(f.ToString()));
+                firms.GetByEmployeeCountRange(100, 300).ToList().ForEach(f => Console.WriteLine(f.ToString()));
             }
             catch (Exception ex)
             {
@@ -102,7 +86,7 @@ namespace Task1
             Console.WriteLine("\nФирмы, находящиеся в Лондоне:");
             try
             {
-                foundLINQ.GetByAddress(firms, "London").ToList().ForEach(f => Console.WriteLine(f.ToString()));
+                firms.GetByAddress("London").ToList().ForEach(f => Console.WriteLine(f.ToString()));
             }
             catch (Exception ex)
             {
@@ -113,7 +97,7 @@ namespace Task1
             Console.WriteLine("\nФирмы, у которых фамилия директора 'White':");
             try
             {
-                foundLINQ.GetByDirectorLastName(firms, "White").ToList().ForEach(f => Console.WriteLine(f.ToString()));
+                firms.GetByDirectorLastName("White").ToList().ForEach(f => Console.WriteLine(f.ToString()));
             }
             catch (Exception ex)
             {
@@ -123,8 +107,8 @@ namespace Task1
 
             Console.WriteLine("\nФирмы, основанные более 2 лет назад:");
             try
-            {
-                foundLINQ.GetFirmsFoundedBy(firms, 2).ToList().ForEach(f => Console.WriteLine(f.ToString()));
+            {   
+                firms.GetFirmsFoundedBy(2).ToList().ForEach(f => Console.WriteLine(f.ToString()));
             }
             catch (Exception ex)
             {
@@ -135,16 +119,12 @@ namespace Task1
             Console.WriteLine("\nФирмы, основанные 123 дня назад:");
             try
             {
-                foundLINQ.GetFirmsFoundedDaysAgo(firms, 123).ToList().ForEach(f => Console.WriteLine(f.ToString()));
-            }
+                firms.GetFirmsFoundedDaysAgo(123).ToList().ForEach(f => Console.WriteLine(f.ToString()));
+            }       
             catch (Exception ex)
             {
                 Console.WriteLine($"Ошибка при получении фирм по дням основания: {ex.Message}");
             }
-
-
-
-
         }
     }
 }

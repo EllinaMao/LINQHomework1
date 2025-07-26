@@ -45,17 +45,6 @@ Email;
 Такой результат, потому что (7+5 = 12, 8+1 = 9, 1+2+1 = 4).
 
 */
-    public static class ConsoleCl
-    {
-    public static void ClearConsole()
-        {
-            Console.WriteLine("\nНажмите любую кнопку:");
-            Console.ReadKey();
-            Console.Clear();
-        }
-    }
-
-        
     internal class Program
     {
         static void Main(string[] args)

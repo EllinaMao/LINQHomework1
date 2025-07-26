@@ -7,9 +7,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\LINQ\LINQ.csproj" />
-    <ProjectReference Include="..\Task3\Employers.csproj" />
-  </ItemGroup>
-
 </Project>
